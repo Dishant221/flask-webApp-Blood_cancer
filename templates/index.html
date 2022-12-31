@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blood Cancer Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        
+            <h2> Select image to predict Blood Cancer</h2>
+            
+          <form method="post" action="/" enctype="multipart/form-data">
+            <div class="form-row">
+              
+                <input type="file"  name= "file" class="form-control-file" placeholder="upload file" autocomplete="off" required>
+              
+              <br>
+                <input type="submit"  value="submit" class="btn btn-primary btn-block btn-lg" btn btn-primary btn-lg>
+              
+            </div>
+          </form>
+          <br>
+
+           <a href="{{ url_for('Cancer_prediction', filename=filename) }}" ><button type="button"  class="btn btn-secondary btn-lg btn-block" >Prediction</button> </a>
+
+
+
+
+
+            <p>
+                {% with messages = get_flashed_messages() %}
+                 {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                          <li> {{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                 {% endif %}
+                {% endwith %}
+            </p>
+
+            {% if filename %}
+              <div>
+                <img src="{{ url_for('display_image', filename=filename) }}">
+              </div>
+            {% endif%}
+            <br><br>
+
+            {% if data %}
+              {% if data[0][0] == 1.0 %}
+                  <h1> myeloma cancer </h1>
+              {% else %}
+                  <h1> Leukimia cancer </h1>
+              {% endif %}
+
+              
+
+            {% endif %}
+            
+
+
+            
+
+
+        
+
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>
